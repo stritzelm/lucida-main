@@ -10,6 +10,7 @@ public class LucidaMainApplication
 	public static void main(String[] args)
 	{
 		SpringApplication.run(LucidaMainApplication.class, args);
+		System.out.println("Code change");
 	}
 
 }
