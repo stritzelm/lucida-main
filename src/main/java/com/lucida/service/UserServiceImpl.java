@@ -3,10 +3,9 @@ package com.lucida.service;
 import com.lucida.model.User;
 import com.lucida.repository.UserRepository;
 import com.lucida.web.dto.UserRegistrationDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lucida.model.Role;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.Role;
 import java.util.Arrays;
 
 @Service
@@ -22,9 +21,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(),
-                registrationDto.getEmail(), registrationDto.getPassword());
-
+        Role role = new Role("ROLE_USER");
+        User user = new User(registrationDto.getFirstName(), registrationDto.getLastName(), registrationDto.getEmail(),
+                registrationDto.getPassword(), role);
         return userRepository.save(user);
     }
 }
