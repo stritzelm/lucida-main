@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Lucida Trucking Operations - Financial Simulator </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1 align="center">Financial Simulator</h1>
+        <br/>
+        <div class="container">
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Monthly Miles</th><th>Annual Miles</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td th:text="${simulationConfigForm.milesCountReportTableView.monthlyMiles}">Monthly Miles</td>
+                    <td th:text="${simulationConfigForm.milesCountReportTableView.annualMiles}">Annual Miles</td>
+                </tr>
+            </table>
+        </div>
+
+        <br/>
+        <br>
+
+        <form method="post" th:action="@{/}" th:object="${simulationConfigForm}">
+            <div class="container">
+                <table id="performance_assumptions" class="table table-striped table-hover form-narrow ">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Performance Assumptions</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td align="left">Paid Miles (Per week)</td>
+                        <td align="right">
+                        <textarea id="paidMilesPerWeek" th:text="${simulationConfigForm.performanceAssumptionsViewForm.paidMilesPerWeek}"> # Miles </textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Unpaid Miles (Per week)</td>
+                        <td align="right">
+                        <textarea id="unpaidMilesPerWeek" th:text="${simulationConfigForm.performanceAssumptionsViewForm.unpaidMilesPerWeek}"> # Miles </textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Fuel Mileage Miles (Per week)</td>
+                        <td align="right">
+                        <textarea id="fuelMileage" th:text="${simulationConfigForm.performanceAssumptionsViewForm.fuelMileage}"> # Miles </textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Fuel Cost per gallon</td>
+                        <td align="right">
+                        <textarea id="fuelCostPerGallon" th:text="${simulationConfigForm.performanceAssumptionsViewForm.fuelCostPerGallon}"> USD </textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Weeks worked per year</td>
+                        <td align="right">
+                        <textarea id="weeksWorkedPerYear" th:text="${simulationConfigForm.performanceAssumptionsViewForm.weeksWorkedPerYear}" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="container">
+                <table id="fixed_costs" class="table table-striped table-hover form-narrow">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th align="left"></th>
+                        <th align="center">Cost Per Mile</th>
+                        <th align="center">Monthly Total</th>
+                        <th align="center">Annual Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tableEntry: ${simulationConfigForm.fixedCostsReportTableView.tableEntries}">
+                        <td th:text="${tableEntry.category}"/>
+                        <td></td>
+                        <td> <textarea id="fixedCostsEntry_MonthlyTotal"> # Weeks </textarea>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>FIXED EXPENSE TOTALS</td>
+                        <td th:text="${simulationConfigForm.fixedCostsReportTableView.fixedExpensesTotalCostPerMile}" />
+                        <td th:text="${simulationConfigForm.fixedCostsReportTableView.monthlyFixedExpenseTotal}" />
+                        <td th:text="${simulationConfigForm.fixedCostsReportTableView.annualFixedExpenseTotal}" />
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="container">
+                <table id="variable_costs" class="table table-striped table-hover form-narrow">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th align="left"></th>
+                        <th align="center">Cost Per Mile</th>
+                        <th align="center">Monthly Total</th>
+                        <th align="center">Annual Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tableEntry: ${simulationConfigForm.variableCostsReportTableView.tableEntries}">
+                        <td th:text="${tableEntry.category}"/>
+                        <td></td>
+                        <td> <textarea id="variableCostsEntry_TotalCostPerMile"> </textarea>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>VARIABLE EXPENSE TOTALS</td>
+                        <td th:text="${simulationConfigForm.variableCostsReportTableView.variableExpensesTotalCostPerMile}" />
+                        <td th:text="${simulationConfigForm.variableCostsReportTableView.monthlyVariableExpenseTotal}" />
+                        <td th:text="${simulationConfigForm.variableCostsReportTableView.annualVariableExpenseTotal}" />
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Form submission button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-success btn-lg" th:name="generateSamples">Generate Samples</button>
+            </div>
+        </form>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

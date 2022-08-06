@@ -1,10 +1,13 @@
-package com.lucida.web.dto;
+package com.lucida.dto;
 
 public class UserRegistrationDto {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+
+    public UserRegistrationDto(){
+    }
 
     public UserRegistrationDto(String firstName,String lastName, String email, String password) {
         super();
@@ -31,7 +34,7 @@ public class UserRegistrationDto {
     }
 
     public String getEmail() {
-        return email;
+            return email;
     }
 
     public void setEmail(String email) {

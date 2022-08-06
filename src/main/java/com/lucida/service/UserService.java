@@ -1,8 +1,8 @@
 package com.lucida.service;
 
 import com.lucida.model.User;
-import com.lucida.web.dto.UserRegistrationDto;
+import com.lucida.dto.UserRegistrationDto;
 
-public interface UserService {
+public interface UserService  {
     User save(UserRegistrationDto registrationDto);
 }
